@@ -13,13 +13,13 @@ int main()
     sf::Clock clock;
 
     //list
-    int nbParticle = 300;
+    int nbParticle = 10000;
     std::vector<Particle> particlesList;
 
     //center
+    float radiusCenter = 10.0f;
     sf::Vector2f positionCenter = sf::Vector2f(WIN_WIDTH/2,WIN_HEIGHT/2);
     sf::Vector2f velicityCenter = sf::Vector2f(0,0);
-    float radiusCenter = 10.0f;
     Particle center = Particle(positionCenter,velicityCenter,radiusCenter);
     //center.setColor(sf::Color::Blue);
 
@@ -31,7 +31,7 @@ int main()
         float dx = position.x - center.getPosition().x;
         float dy = position.y - center.getPosition().y;
         sf::Vector2f velocity = sf::Vector2f(-dy/1000, dx/1000);
-        float radius = 5;
+        float radius = 0.5;
         particlesList.emplace_back(position, velocity, radius);
     }
 
@@ -57,7 +57,7 @@ int main()
             p.update(dt);// update the particle
             p.applyGravity(center);// apply the gravity
             p.draw(window); // draw the particle
-            p.drawHalo(window,30.0f,10.0f);
+            p.drawHalo(window,2.0f,10.0f);
         }
         window.display(); // display the window
     }

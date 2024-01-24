@@ -14,7 +14,7 @@ private:
     sf::Vector2f velocity;
     sf::Vector2f acceleration;
     float radius;
-    float G = 1000.0f;
+    float G = 10000.0f;
 
     sf::Vector2f forceGravitationelle(Particle p);
     sf::Vector2f distance(Particle p);

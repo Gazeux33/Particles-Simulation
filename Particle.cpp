@@ -19,28 +19,23 @@ Particle::Particle(sf::Vector2f initilalPosition,sf::Vector2f myVelocity,float m
 sf::Vector2f Particle::forceGravitationelle(Particle p) {
     sf::Vector2f vectorDist = distance(p);
     float dist = sqrt(pow(vectorDist.x, 2) + pow(vectorDist.y, 2));
-    float force = G / (dist * dist);
+    float force = G / std::max(dist * dist,1000.0f);
 
-    return {-force * vectorDist.x / dist, -force * vectorDist.y / dist};
+    return {-force * vectorDist / dist};
 }
 
 sf::Vector2f Particle::distance(Particle p){
-    return {position.x - p.getPosition().x,position.y - p.getPosition().y};
+    return {position - p.getPosition()};
 }
 
 void Particle::update(float dt) {
-    velocity.x += acceleration.x * dt;
-    velocity.y += acceleration.y * dt;
-
-    position.x += velocity.x * dt * 60;
-    position.y += velocity.y * dt * 60;
-    circle.setPosition(position);
+    velocity += acceleration * dt;
+    position += velocity * dt * 60.0f;
+    circle.setPosition(position - sf::Vector2f(radius,radius));
 }
 
 void Particle::applyGravity(Particle center) {
-    const sf::Vector2f forceG = forceGravitationelle(center);
-    acceleration.x = forceG.x;
-    acceleration.y = forceG.y;
+    acceleration = forceGravitationelle(center);
 }
 
 
