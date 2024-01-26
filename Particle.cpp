@@ -5,9 +5,10 @@
 #include "Particle.h"
 
 
-Particle::Particle(sf::Vector2f initilalPosition,sf::Vector2f myVelocity,float myRadius){
+Particle::Particle(sf::Vector2f initilalPosition,sf::Vector2f myVelocity,float myMass,float myRadius){
     position = initilalPosition;
     velocity = myVelocity;
+    mass = myMass;
     radius = myRadius;
     acceleration = sf::Vector2f(0,0);
 
@@ -19,8 +20,8 @@ Particle::Particle(sf::Vector2f initilalPosition,sf::Vector2f myVelocity,float m
 sf::Vector2f Particle::forceGravitationelle(Particle p) {
     sf::Vector2f vectorDist = distance(p);
     float dist = sqrt(pow(vectorDist.x, 2) + pow(vectorDist.y, 2));
-    float force = G / std::max(dist * dist,1000.0f);
-
+    dist = std::max(dist,50.0f);
+    float force = G*mass*p.getMass()/(dist*dist);
     return {-force * vectorDist / dist};
 }
 
@@ -31,7 +32,7 @@ sf::Vector2f Particle::distance(Particle p){
 void Particle::update(float dt) {
     velocity += acceleration * dt;
     position += velocity * dt * 60.0f;
-    circle.setPosition(position - sf::Vector2f(radius,radius));
+    circle.setPosition(position);
 }
 
 void Particle::applyGravity(Particle center) {
@@ -76,5 +77,15 @@ void Particle::setG(float value) {
 void Particle::setColor(sf::Color color) {
     circle.setFillColor(color);
 }
+
+float Particle::getMass() {
+    return mass;
+}
+
+void Particle::setAcceleration(sf::Vector2f newValue) {
+    acceleration = newValue;
+}
+
+
 
 
