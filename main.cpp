@@ -13,7 +13,7 @@ int main()
     sf::Clock clock;
 
     //list
-    int nbParticle = 300;
+    int nbParticle = 10000;
     std::vector<Particle> particlesList;
 
     //center
@@ -57,7 +57,7 @@ int main()
             p.update(dt);// update the particle
             p.applyGravity(center);// apply the gravity
             p.draw(window); // draw the particle
-            p.drawHalo(window,30.0f,10.0f);
+            p.drawHalo(window,7.0f,10.0f);
         }
         window.display(); // display the window
     }
