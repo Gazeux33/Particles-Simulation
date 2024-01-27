@@ -30,6 +30,7 @@ public:
     void setG(float value);
     void setColor(sf::Color color);
     void drawHalo(sf::RenderWindow& win,float size,float opacity);
+    void setPos();
 };
 
 

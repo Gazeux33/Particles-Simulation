@@ -17,10 +17,11 @@ int main()
     std::vector<Particle> particlesList;
 
     //center
+    float radiusCenter = 10.0f;
     sf::Vector2f positionCenter = sf::Vector2f(WIN_WIDTH/2,WIN_HEIGHT/2);
     sf::Vector2f velicityCenter = sf::Vector2f(0,0);
-    float radiusCenter = 10.0f;
     Particle center = Particle(positionCenter,velicityCenter,radiusCenter);
+    center.setPos();
     //center.setColor(sf::Color::Blue);
 
 

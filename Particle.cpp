@@ -83,4 +83,8 @@ void Particle::setColor(sf::Color color) {
     circle.setFillColor(color);
 }
 
+void Particle::setPos() {
+    circle.setPosition(position - sf::Vector2f(circle.getRadius(),circle.getRadius()));
+}
+
 
