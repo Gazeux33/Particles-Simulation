@@ -13,7 +13,7 @@ int main()
     sf::Clock clock;
 
     //list
-    int nbParticle = 100;
+    int nbParticle = 200;
     std::vector<Particle> particlesList;
 
     int maxMass = 10000000;
